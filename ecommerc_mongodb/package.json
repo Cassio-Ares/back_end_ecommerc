@@ -4,8 +4,9 @@
   "description": "back-end de um ecommerc basico de uma loja de suplementos usando mongodb",
   "private": true,
   "scripts": {
-    "start": "node ./app.js",
-    "dev": "node ./app.js"
+    "start": "node .index.js",
+    "dev": "node ./swagger/autoGenDoc.js", 
+    "autoDoc":"node ./swagger/autoGenDoc.js"
   },
   "keywords": [],
   "author": "Cassio",
