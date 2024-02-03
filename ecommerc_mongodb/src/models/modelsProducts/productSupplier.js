@@ -12,22 +12,36 @@ const schema = new mongoose.Schema({
     trim: true,
     match: /\S+@\S+\.\S+/,
   },
-  address: {
-    type: String,
-    required: "dado nescessário para cadastro do fornecedor",
-  },
   telephone: {
     type: String,
     required: "dado nescessário para cadastro do fornecedor",
   },
-  CNPJ: {
+  address: {
+    street:{
+     type: String,
+      required: 'este campo é obrigatório preencha com endereço mais proximo deste fornecedor',
+    },
+    number:{
+     type: Number,
+      required: 'este campo é obrigatório preencha com endereço mais proximo deste fornecedor',
+    },
+    city:{
+     type: String,
+      required: 'este campo é obrigatório preencha com endereço mais proximo deste fornecedor',
+    },
+    cep:{
+     type: String,
+      required: 'este campo é obrigatório preencha com endereço mais proximo deste fornecedor',
+    }
+ },
+  cnpj: {
     type: String,
     required: "dado nescessário para cadastro do fornecedor",
   },
-  productsName:[{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Products"
-  }]
+  // productsName:[{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Products"
+  // }]
 },
   {
     timestamps: true,

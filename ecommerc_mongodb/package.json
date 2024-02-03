@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node .index.js",
     "dev": "node ./swagger/autoGenDoc.js", 
-    "autoDoc":"node ./swagger/autoGenDoc.js"
+    "autoDoc":"nodemon ./swagger/autoGenDoc.js"
   },
   "keywords": [],
   "author": "Cassio",

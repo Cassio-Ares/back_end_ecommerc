@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const schema = new mongoose.Schema({
     typeOfDoc: {
           type: String,
-          default: "CPF"
     }
 });
 

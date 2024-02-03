@@ -24,6 +24,7 @@ const schema = new mongoose.Schema({
     },
     reviewsProduct: {
         type: String,
+        default: ""
     },
     expirationDate: {
         type: Date,
