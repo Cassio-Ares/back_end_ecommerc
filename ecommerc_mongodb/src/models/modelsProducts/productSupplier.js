@@ -38,16 +38,16 @@ const schema = new mongoose.Schema({
     type: String,
     required: "dado nescessário para cadastro do fornecedor",
   },
-  // productsName:[{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Products"
-  // }]
+  productsName:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Products"
+  }]
 },
   {
     timestamps: true,
   }
 );
 
-const SchemaSupplier = mongoose.models.Suppliers || mongoose.model('Suppliers', schema);
+const SchemaSupplier = mongoose.models.Suppliers || mongoose.model('Supplier', schema);
 
 module.exports = SchemaSupplier;

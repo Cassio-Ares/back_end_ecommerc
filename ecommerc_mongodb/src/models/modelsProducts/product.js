@@ -1,5 +1,6 @@
 const mongoose =  require('mongoose');
 
+
 const schema = new mongoose.Schema({
     nameProduct:{
         type: String,
@@ -35,15 +36,15 @@ const schema = new mongoose.Schema({
         required: 'dado nescessário para o cadastrado do produto',
         trim: true,
     },
-    productCategory:[{
+    Category:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "ProductCategory",
+        ref: "Category",
         required: 'dado nescessário para o cadastrado do produto',
         trim: true,
     }],
-    productSupplier:[{
+    Supplier:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "ProductSupplier",
+        ref: "Supplier",
         required: 'dado nescessário para o cadastrado do produto',
         trim: true,
     }]

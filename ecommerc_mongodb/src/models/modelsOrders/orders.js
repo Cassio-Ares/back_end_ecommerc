@@ -13,7 +13,7 @@ const schema = new mongoose.Schema(
     },
     orderStatus: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "OrderStatus",
+      ref: "Status",
     },
     deliveryDate: {
       type: Date,

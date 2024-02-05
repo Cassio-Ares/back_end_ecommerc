@@ -35,7 +35,7 @@ const schema = new mongoose.Schema({
         type: String,
         required: 'este campo é obrigatório preencha com seu telefone por favor',
     },
-   typeOfDoc: {
+    typeOfDocument: {
        type: mongoose.Schema.Types.ObjectId,
        ref: 'TypeOfDocument',
     //    required: 'este campo é obrigatório',

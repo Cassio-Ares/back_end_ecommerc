@@ -44,7 +44,7 @@
                   "telephone": {
                     "example": "any"
                   },
-                  "typeOfDoc": {
+                  "typeOfDocument": {
                     "example": "any"
                   },
                   "numberDocument": {
@@ -464,15 +464,79 @@
                   "productStock": {
                     "example": "any"
                   },
-                  "productCategory": {
+                  "Category": {
                     "example": "any"
                   },
-                  "productSupplier": {
+                  "Supplier": {
                     "example": "any"
                   }
                 }
               }
             }
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
           }
         }
       }
@@ -579,7 +643,7 @@
                   }
                 }
               },
-              "typeOfDoc": {
+              "typeOfDocument": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -767,7 +831,7 @@
                   }
                 }
               },
-              "productCategory": {
+              "Category": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -789,7 +853,7 @@
                   }
                 }
               },
-              "productSupplier": {
+              "Supplier": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -855,7 +919,7 @@
         "properties": {
           "title": {
             "type": "string",
-            "example": "Suppliers"
+            "example": "Supplier"
           },
           "required": {
             "type": "array",
@@ -955,6 +1019,24 @@
                   "type": {
                     "type": "string",
                     "example": "string"
+                  }
+                }
+              },
+              "productsName": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "array"
+                  },
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "example": "schemaobjectid"
+                      }
+                    }
                   }
                 }
               },

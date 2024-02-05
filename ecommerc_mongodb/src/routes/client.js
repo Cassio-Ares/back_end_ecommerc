@@ -6,9 +6,9 @@ const router = express.Router();
 router.post('/client', connectDB, async (req, res)=>{
    //#swagger.tags = ['Cliente']
 
-  let {name, email, address, telephone, typeOfDoc, numberDocument } = req.body;
+  let {name, email, address, telephone, typeOfDocument, numberDocument } = req.body;
   try {
-    const newClient = await Client.create({name, email, address, telephone, typeOfDoc, numberDocument });
+    const newClient = await Client.create({name, email, address, telephone, typeOfDocument, numberDocument });
      return res.status(201).json(newClient);
     
    } catch (error) {
