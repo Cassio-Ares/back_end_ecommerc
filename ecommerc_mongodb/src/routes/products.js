@@ -4,6 +4,7 @@ const router = express.Router();
 const Products = require("../models/modelsProducts/product");
 
 router.post("/products", connectDB, async (req, res) => {
+  //#swagger.tags = ['Product']
   const {
     nameProduct,
     imgProduct,
@@ -48,6 +49,7 @@ router.post("/products", connectDB, async (req, res) => {
 });
 
 router.get('/products', connectDB, async (req, res) => {
+    //#swagger.tags = ['Product']
      try {
       const products = await Products.find();
       return res.status(200).json(products);
@@ -58,6 +60,7 @@ router.get('/products', connectDB, async (req, res) => {
 });
 
 router.get('/products/:id', connectDB, async (req, res) =>{
+    //#swagger.tags = ['Product']
     const {id} = req.params;
 
     try {
@@ -70,6 +73,7 @@ router.get('/products/:id', connectDB, async (req, res) =>{
 });
 
 router.put('/products/:id', connectDB, async(req, res)=>{
+    //#swagger.tags = ['Product']
   const body = req.body;
   const {id} = req.params;
 
@@ -83,6 +87,7 @@ router.put('/products/:id', connectDB, async(req, res)=>{
 });
 
 router.delete('/products/:id', connectDB, async (req, res) => {
+    //#swagger.tags = ['Product']
   const {id} = req.params
 
   try {

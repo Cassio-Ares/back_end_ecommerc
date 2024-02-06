@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema(
   {
-    cliente: {
+    client: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Client",
       required:"para concluir seu pedido é preciso fazer o cadastrado para que possamos enviar seu pedido com segurança.",
@@ -19,7 +19,7 @@ const schema = new mongoose.Schema(
       type: Date,
     },
     returnDeadline: {
-      type: Number,
+      type: Date,
     },
   },
   {

@@ -7,14 +7,16 @@ const schema = new mongoose.Schema({
             ref: 'Products'
         }
     ],
-    quantityOfProduct: {
+    quantityOfProduct: [{
         type: Number,
         default: 1,
-    },
-    unitPrice: {
-        type: Number,
-        required: true
-    },
+    }],
+    unitPrices:  [
+        {
+          unitPrice: Number,
+          total: Number,
+        }
+      ],
     totalOrder:{
         type: Number,
         required: true
@@ -25,7 +27,7 @@ const schema = new mongoose.Schema({
 }
 })
 
-const SchemaOrderDetails = mongoose.models.OrdelDetails || mongoose.model("OrdelDetails", schema);
+const SchemaOrderDetails = mongoose.models.OrderDetails || mongoose.model("OrdelDetails", schema);
 
 module.exports = SchemaOrderDetails;
 

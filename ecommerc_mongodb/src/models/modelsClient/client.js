@@ -38,7 +38,7 @@ const schema = new mongoose.Schema({
     typeOfDocument: {
        type: mongoose.Schema.Types.ObjectId,
        ref: 'TypeOfDocument',
-    //    required: 'este campo é obrigatório',
+      required: 'este campo é obrigatório',
     },
     numberDocument:{
         type: String,
