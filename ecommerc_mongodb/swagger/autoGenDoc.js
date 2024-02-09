@@ -1,4 +1,5 @@
 const mongooseToSwagger = require('mongoose-to-swagger');
+const SchemaAdm = require('../src/models/modelAdm/adm.js');
 const SchemaClient = require('../src/models/modelsClient/client.js');
 const SchemaDoc = require('../src/models/modelsClient/typeOfDocument.js');
 const SchemaProducts = require('../src/models/modelsProducts/product.js');
@@ -8,6 +9,7 @@ const SchemaOrders = require('../src/models/modelsOrders/orders.js');
 const SchemaStatus = require('../src/models/modelsOrders/orderStatus.js');
 const SchemaPayment = require('../src/models/modelsOrders/formOfPayment.js');
 const SchemaOrderDetails = require('../src/models/modelsOrders/orderDetails.js');
+
 const swaggerAutogen = require('swagger-autogen')({
     openapi: "3.0.0",
     language: "pt-BR",
@@ -34,6 +36,7 @@ let doc = {
     produces: ["application/json"],
     components:{
         schemas:{
+            Adm:mongooseToSwagger(SchemaAdm),
             Client: mongooseToSwagger(SchemaClient),
             TypeOfDocument: mongooseToSwagger(SchemaDoc),
             Products: mongooseToSwagger(SchemaProducts),

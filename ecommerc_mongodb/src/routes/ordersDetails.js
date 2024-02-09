@@ -5,7 +5,7 @@ const Products = require("../models/modelsProducts/product");
 const routes = express.Router();
 
 routes.post("/ordersdetails", connectDB, async (req, res) => {
-  //#swagger.tags = ['Orders/orderDetails']
+  //#swagger.tags = ['Orders/OrderDetails']
   const { products, quantityOfProduct, formOfPayment } = req.body;
 
   const populatedProducts = await Products.find(
@@ -44,7 +44,7 @@ routes.post("/ordersdetails", connectDB, async (req, res) => {
 });
 
 routes.get("/ordersdetails", connectDB, async (req, res) => {
-  //#swagger.tags = ['Orders/orderDetails']
+  //#swagger.tags = ['Orders/OrderDetails']
    try {
     const getDetails = await Details.find();
      return res.status(200).json(getDetails)
@@ -56,7 +56,7 @@ routes.get("/ordersdetails", connectDB, async (req, res) => {
 });
 
 routes.get("/ordersdetails/:id", connectDB, async (req, res) => {
-  //#swagger.tags = ['Orders/orderDetails']
+  //#swagger.tags = ['Orders/OrderDetails']
   const {id} = req.params
   try {
     const getOneDetails = await Details.findById(id);
@@ -68,7 +68,7 @@ routes.get("/ordersdetails/:id", connectDB, async (req, res) => {
 });
 
 routes.put("/ordersdetails", connectDB, async (req, res) => {
-  //#swagger.tags = ['Orders/orderDetails']
+  //#swagger.tags = ['Orders/OrderDetails']
   const body = req.body;
   const {id} = req.params
 
@@ -82,7 +82,7 @@ routes.put("/ordersdetails", connectDB, async (req, res) => {
 });
 
 routes.delete("/ordersdetails", connectDB, async (req, res) => {
-    //#swagger.tags = ['Orders/orderDetails']
+    //#swagger.tags = ['Orders/OrderDetails']
     const {id} = req.params;
 
     try {

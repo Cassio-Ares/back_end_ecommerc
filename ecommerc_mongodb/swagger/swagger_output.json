@@ -12,10 +12,170 @@
     }
   ],
   "paths": {
+    "/admincreate": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Criado"
+          },
+          "400": {
+            "description": "Solicitação Inválida"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
+                  },
+                  "name": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Solicitação Inválida"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alter/{id}": {
+      "put": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/{id}": {
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
     "/client": {
       "post": {
         "tags": [
-          "Cliente"
+          "Clients"
         ],
         "description": "",
         "responses": {
@@ -58,7 +218,7 @@
       },
       "get": {
         "tags": [
-          "Cliente"
+          "Clients"
         ],
         "description": "",
         "responses": {
@@ -72,9 +232,9 @@
       }
     },
     "/client/{id}": {
-      "put": {
+      "get": {
         "tags": [
-          "Cliente"
+          "Clients"
         ],
         "description": "",
         "parameters": [
@@ -88,21 +248,84 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Solicitação Inválida"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Solicitação Inválida"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Clients"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Solicitação Inválida"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
         }
       }
     },
-    "/typedoc": {
+    "/typeofdocument": {
       "post": {
         "tags": [
-          "Cliente/Tipos de documentos"
+          "Client/Type of document"
         ],
         "description": "",
         "responses": {
           "201": {
             "description": "Criado"
+          },
+          "400": {
+            "description": "Solicitação Inválida"
           },
           "404": {
             "description": "Não Encontrado"
@@ -110,13 +333,41 @@
           "500": {
             "description": "Erro Interno do Servidor"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "typeOfDoc": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Client/Type of document"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
         }
       }
     },
-    "/typedoc/{id}": {
+    "/typeofdocument/{id}": {
       "delete": {
         "tags": [
-          "Cliente/Tipos de documentos"
+          "Client/Type of document"
         ],
         "description": "",
         "parameters": [
@@ -144,6 +395,9 @@
     },
     "/category": {
       "post": {
+        "tags": [
+          "Produts/Categories"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -175,6 +429,9 @@
         }
       },
       "get": {
+        "tags": [
+          "Produts/Categories"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -191,6 +448,9 @@
     },
     "/category/{id}": {
       "get": {
+        "tags": [
+          "Produts/Categories"
+        ],
         "description": "",
         "parameters": [
           {
@@ -215,6 +475,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Produts/Categories"
+        ],
         "description": "",
         "parameters": [
           {
@@ -239,6 +502,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Produts/Categories"
+        ],
         "description": "",
         "parameters": [
           {
@@ -576,7 +842,7 @@
     "/orders": {
       "post": {
         "tags": [
-          "orders"
+          "Orders"
         ],
         "description": "",
         "responses": {
@@ -619,7 +885,7 @@
       },
       "get": {
         "tags": [
-          "orders"
+          "Orders"
         ],
         "description": "",
         "responses": {
@@ -630,7 +896,7 @@
       },
       "put": {
         "tags": [
-          "orders"
+          "Orders"
         ],
         "description": "",
         "responses": {
@@ -641,7 +907,7 @@
       },
       "delete": {
         "tags": [
-          "orders"
+          "Orders"
         ],
         "description": "",
         "responses": {
@@ -654,7 +920,7 @@
     "/ordersdetails": {
       "post": {
         "tags": [
-          "Orders/orderDetails"
+          "Orders/OrderDetails"
         ],
         "description": "",
         "responses": {
@@ -688,7 +954,7 @@
       },
       "get": {
         "tags": [
-          "Orders/orderDetails"
+          "Orders/OrderDetails"
         ],
         "description": "",
         "responses": {
@@ -702,7 +968,7 @@
       },
       "put": {
         "tags": [
-          "Orders/orderDetails"
+          "Orders/OrderDetails"
         ],
         "description": "",
         "responses": {
@@ -716,7 +982,7 @@
       },
       "delete": {
         "tags": [
-          "Orders/orderDetails"
+          "Orders/OrderDetails"
         ],
         "description": "",
         "responses": {
@@ -732,7 +998,7 @@
     "/ordersdetails/{id}": {
       "get": {
         "tags": [
-          "Orders/orderDetails"
+          "Orders/OrderDetails"
         ],
         "description": "",
         "parameters": [
@@ -1024,6 +1290,93 @@
   },
   "components": {
     "schemas": {
+      "Adm": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Adms"
+          },
+          "required": {
+            "type": "array",
+            "example": [
+              "name",
+              "email",
+              "password"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "email": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "password": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "_id": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "createdAt": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "format": {
+                    "type": "string",
+                    "example": "date-time"
+                  }
+                }
+              },
+              "updatedAt": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "format": {
+                    "type": "string",
+                    "example": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "Client": {
         "type": "object",
         "properties": {
@@ -1037,6 +1390,7 @@
               "name",
               "email",
               "telephone",
+              "typeOfDocument",
               "numberDocument"
             ],
             "items": {

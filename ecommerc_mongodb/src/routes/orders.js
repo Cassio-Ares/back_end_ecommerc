@@ -8,7 +8,7 @@ const routes = express.Router();
 
 
 routes.post('/orders', connectDB, async (req, res) => {
-    //#swagger.tags= ['orders']
+    //#swagger.tags= ['Orders']
 
     let {client, orderDetails, orderStatus, deliveryDate, returnDeadline} = req.body;
 
@@ -39,7 +39,7 @@ routes.post('/orders', connectDB, async (req, res) => {
 });
 
 routes.get('/orders', connectDB, async (req, res) => {
-    //#swagger.tags= ['orders']
+    //#swagger.tags= ['Orders']
         try {
             const orders = await Orders.find().populate("client orderDetails orderStatus");
             return res.json(orders);
@@ -49,15 +49,15 @@ routes.get('/orders', connectDB, async (req, res) => {
 });
 
 routes.get('/orders', connectDB, async (req, res) => {
-    //#swagger.tags= ['orders']
+    //#swagger.tags= ['Orders']
 })
 
 routes.put('/orders', connectDB, async (req, res) => {
-    //#swagger.tags= ['orders']
+    //#swagger.tags= ['Orders']
 })
 
 routes.delete('/orders', connectDB, async (req, res) => {
-    //#swagger.tags= ['orders']
+    //#swagger.tags= ['Orders']
 })
 
 

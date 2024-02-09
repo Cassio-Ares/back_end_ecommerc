@@ -4,7 +4,7 @@ const router = express.Router();
 const Category = require("../models/modelsProducts/productCategory");
 
 router.post("/category", connectDB, async (req, res) => {
-  //#swagger.tag('Produto/Categoria')
+  //#swagger.tags =['Produts/Categories']
   const { category, order } = req.body;
 
   try {
@@ -20,7 +20,7 @@ router.post("/category", connectDB, async (req, res) => {
 });
 
 router.get("/category", connectDB, async (req, res) => {
-  //#swagger.tag('Produto/Categoria')
+ //#swagger.tags =['Produts/Categories']
 
   try {
     const getCategory = await Category.find();
@@ -34,7 +34,7 @@ router.get("/category", connectDB, async (req, res) => {
 });
 
 router.get("/category/:id", connectDB, async (req, res) => {
-  //#swagger.tag('Produto/Categoria')
+  //#swagger.tags =['Produts/Categories']
   const { id } = req.params;
   try {
     const getOneCategory = await Category.findById(id);
@@ -49,7 +49,7 @@ router.get("/category/:id", connectDB, async (req, res) => {
 });
 
 router.put("/category/:id", connectDB, async (req, res) => {
-  //#swagger.tag('Produto/Categoria')
+ //#swagger.tags =['Produts/Categories']
   const body = req.body;
 
   const { id } = req.params;
@@ -70,7 +70,7 @@ router.put("/category/:id", connectDB, async (req, res) => {
 });
 
 router.delete("/category/:id", connectDB, async (req, res) => {
-  //#swagger.tag('Produto/Categoria')
+ //#swagger.tags =['Produts/Categories']
   const { id } = req.params;
 
   try {

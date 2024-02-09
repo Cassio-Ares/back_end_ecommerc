@@ -1,4 +1,6 @@
 function routes(app){
+    app.use('/', require('./routes/adm.js'))
+
     app.use('/', require('./routes/client.js'));
     app.use('/', require('./routes/typeOfDoc.js'));
 
