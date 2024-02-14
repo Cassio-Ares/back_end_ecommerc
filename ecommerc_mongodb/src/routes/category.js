@@ -2,12 +2,28 @@ const express = require("express");
 const connectDB = require("../middlewares/connectDB");
 const router = express.Router();
 const Category = require("../models/modelsProducts/productCategory");
+const authAdm = require("../middlewares/authAdm");
 
-router.post("/category", connectDB, async (req, res) => {
+router.post("/category", authAdm, connectDB, async (req, res) => {
   //#swagger.tags =['Produts/Categories']
   const { category, order } = req.body;
 
   try {
+    const exist = await Category.findOne({ category });
+    const orderOcup = await Category.findOne({ order });
+
+    if (exist) {
+      throw new Error(category + "já existe no banco de dados.");
+    }
+
+    if (orderOcup) {
+      throw new Error(
+        "Já existe uma categoria na posição " +
+          order +
+          " já existe no banco de dados."
+      );
+    }
+
     const categoryProducts = await Category.create({ category, order });
     return res.status(200).json(categoryProducts);
   } catch (error) {
@@ -20,7 +36,7 @@ router.post("/category", connectDB, async (req, res) => {
 });
 
 router.get("/category", connectDB, async (req, res) => {
- //#swagger.tags =['Produts/Categories']
+  //#swagger.tags =['Produts/Categories']
 
   try {
     const getCategory = await Category.find();
@@ -48,16 +64,27 @@ router.get("/category/:id", connectDB, async (req, res) => {
   }
 });
 
-router.put("/category/:id", connectDB, async (req, res) => {
- //#swagger.tags =['Produts/Categories']
-  const body = req.body;
-
+router.put("/category/:id", authAdm, connectDB, async (req, res) => {
+  //#swagger.tags =['Produts/Categories']
+  const { category, order } = req.body;
   const { id } = req.params;
 
   try {
-    const updateCategory = await Category.findByIdAndUpdate(id, body, {
-      new: true,
-    });
+    if (req.body.category === "" || req.body.order === "") {
+      throw new Error(
+        "Todos os campos tem que estar devidamente preenchidos para alterar a Categoria"
+      );
+    }
+
+    if (isNaN(req.body.order)) {
+      throw new Error("O campo 'order' deve ser um número inteiro.");
+    }
+
+    const updateCategory = await Category.findByIdAndUpdate(
+      id,
+      { category, order },
+      { new: true }
+    );
     return res.status(200).json(updateCategory);
   } catch (error) {
     console.error(error);
@@ -69,8 +96,8 @@ router.put("/category/:id", connectDB, async (req, res) => {
   }
 });
 
-router.delete("/category/:id", connectDB, async (req, res) => {
- //#swagger.tags =['Produts/Categories']
+router.delete("/category/:id", authAdm, connectDB, async (req, res) => {
+  //#swagger.tags =['Produts/Categories']
   const { id } = req.params;
 
   try {

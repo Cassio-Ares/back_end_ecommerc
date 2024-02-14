@@ -124,4 +124,4 @@ router.delete("/admin/:id", authAdm, connectBD, async (req, res) => {
 
 module.exports = router;
 
-//throw new Error???
+

@@ -4,8 +4,8 @@
   "description": "back-end de um ecommerc basico de uma loja de suplementos usando mongodb",
   "private": true,
   "scripts": {
-    "start": "node .index.js",
-    "dev": "node ./swagger/autoGenDoc.js",
+    "start": "nodemon .index.js",
+    "dev": "nodemon  ./swagger/autoGenDoc.js",
     "autoDoc": "nodemon ./swagger/autoGenDoc.js"
   },
   "keywords": [],

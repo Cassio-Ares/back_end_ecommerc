@@ -1,10 +1,11 @@
 const express = require('express');
 const connectDB = require('../middlewares/connectDB');
 const Status = require('../models/modelsOrders/orderStatus');
+const authAdm = require('../middlewares/authAdm');
 const router = express.Router();
 
 
-router.post('/status', connectDB, async (req, res) => {
+router.post('/status', authAdm, connectDB, async (req, res) => {
     //#swagger.tags = ['Orders/StatusOrder']
     const { status } = req.body;
 
@@ -17,7 +18,7 @@ router.post('/status', connectDB, async (req, res) => {
     }
 });
 
-router.get('/status',connectDB, async (req, res) => {
+router.get('/status', authAdm ,connectDB, async (req, res) => {
       //#swagger.tags = ['Orders/StatusOrder']
 
       try {
@@ -29,7 +30,7 @@ router.get('/status',connectDB, async (req, res) => {
       }
 });
 
-router.get('/status/:id',connectDB, async (req, res) => {
+router.get('/status/:id', authAdm ,connectDB, async (req, res) => {
       //#swagger.tags = ['Orders/StatusOrder']
     const {id} = req.params;
       try {
@@ -41,13 +42,13 @@ router.get('/status/:id',connectDB, async (req, res) => {
       }
 });
 
-router.put('/status/:id', connectDB, async (req, res) => {
+router.put('/status/:id', authAdm , connectDB, async (req, res) => {
       //#swagger.tags = ['Orders/StatusOrder']
-      const body = req.body;
+      const { status } = req.body;
       const {id} = req.params;
 
       try {
-        const putStatus = await Status.findByIdAndUpdate(id, body, {new: true});
+        const putStatus = await Status.findByIdAndUpdate(id,{ status }, {new: true});
         return res.status(200).json(putStatus);
       } catch (error) {
         console.error(error);
@@ -55,7 +56,7 @@ router.put('/status/:id', connectDB, async (req, res) => {
       }
 });
 
-router.delete('/status/:id', connectDB, async (req, res) => {
+router.delete('/status/:id', authAdm , connectDB, async (req, res) => {
       //#swagger.tags = ['Orders/StatusOrder']
     const {id} = req.params
       try {

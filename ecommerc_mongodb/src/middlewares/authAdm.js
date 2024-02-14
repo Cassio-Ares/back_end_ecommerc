@@ -4,7 +4,7 @@ async function authAdm(req, res, next) {
   const token = req.headers["x-auth-token"];
 
   if (!token) {
-    return res, new Error("Token de autenticação não fornecido");
+    return res.status(401).json({ error: "Token de autenticação não fornecido" });
   };
 
   try {
@@ -14,7 +14,7 @@ async function authAdm(req, res, next) {
     next();
   } catch (error) {
     console.error(error);   
-    return res, new Error("Token de autenticação invalido");
+    return res.status(401).json({ error: "Token de autenticação inválido" });
   }
 }
 

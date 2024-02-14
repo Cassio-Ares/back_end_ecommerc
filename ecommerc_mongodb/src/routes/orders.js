@@ -4,10 +4,11 @@ const Client =require('../models/modelsClient/client');
 const OrderDetails = require('../models/modelsOrders/orderDetails');
 const OrderStatus = require('../models/modelsOrders/orderStatus');
 const Orders = require('../models/modelsOrders/orders');
+const authAdm = require('../middlewares/authAdm');
 const routes = express.Router();
 
 
-routes.post('/orders', connectDB, async (req, res) => {
+routes.post('/orders', authAdm ,connectDB, async (req, res) => {
     //#swagger.tags= ['Orders']
 
     let {client, orderDetails, orderStatus, deliveryDate, returnDeadline} = req.body;

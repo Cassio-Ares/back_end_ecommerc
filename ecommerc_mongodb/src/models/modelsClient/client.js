@@ -10,7 +10,6 @@ const schema = new mongoose.Schema({
         required: 'este campo é obrigatório preencha com seu e-mail que vc mais acessa por favor',
         lowercase: true,
         trim: true,
-        match: /\S+@\S+\.\S+/,
         unique: true
       },
     address: {

@@ -4,7 +4,7 @@ const mongoose =  require('mongoose');
 const schema = new mongoose.Schema({
     nameProduct:{
         type: String,
-        required: 'dado nescessário para o cadastrado do produto',
+        required: 'dado necessário para o cadastrado do produto',
         trim: true,
     },
     imgProduct: {
@@ -12,7 +12,7 @@ const schema = new mongoose.Schema({
     },
     priceProduct: {
         type: Number,
-        required: 'dado nescessário para o cadastrado do produto',
+        required: 'dado necessário para o cadastrado do produto',
         trim: true,
     },
     promotionalPrice:{
@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
     },
     descriptionProduct: {
         type: String,
-        required: 'dado nescessário para o cadastrado do produto',
+        required: 'dado necessário para o cadastrado do produto',
         trim: true,
     },
     reviewsProduct: {
@@ -29,23 +29,23 @@ const schema = new mongoose.Schema({
     },
     expirationDate: {
         type: Date,
-        required: 'dado nescessário para o cadastrado do produto',
+        required: 'dado necessário para o cadastrado do produto',
     },
     productStock: {
         type: Number,
-        required: 'dado nescessário para o cadastrado do produto',
+        required: 'dado necessário para o cadastrado do produto',
         trim: true,
     },
     Category:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category",
-        required: 'dado nescessário para o cadastrado do produto',
+        required: 'dado necessário para o cadastrado do produto',
         trim: true,
     }],
     Supplier:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Supplier",
-        required: 'dado nescessário para o cadastrado do produto',
+        required: 'dado necessário para o cadastrado do produto',
         trim: true,
     }]
 }, 

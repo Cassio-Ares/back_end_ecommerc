@@ -163,6 +163,9 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "404": {
             "description": "Não Encontrado"
           },
@@ -182,6 +185,9 @@
           "201": {
             "description": "Criado"
           },
+          "400": {
+            "description": "Solicitação Inválida"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -192,10 +198,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
+                  "email": {
                     "example": "any"
                   },
-                  "email": {
+                  "name": {
                     "example": "any"
                   },
                   "address": {
@@ -221,9 +227,21 @@
           "Clients"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -284,6 +302,35 @@
           "500": {
             "description": "Erro Interno do Servidor"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
+                  },
+                  "address": {
+                    "example": "any"
+                  },
+                  "telephone": {
+                    "example": "any"
+                  },
+                  "typeOfDocument": {
+                    "example": "any"
+                  },
+                  "numberDocument": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "delete": {
@@ -299,6 +346,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -307,6 +361,9 @@
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -320,12 +377,24 @@
           "Client/Type of document"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Criado"
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Não Encontrado"
@@ -384,9 +453,6 @@
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Não Encontrado"
-          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -399,9 +465,21 @@
           "Produts/Categories"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Não Encontrado"
@@ -487,17 +565,44 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "404": {
             "description": "Não Encontrado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category": {
+                    "example": "any"
+                  },
+                  "order": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -514,11 +619,21 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Não Encontrado"
@@ -535,12 +650,160 @@
           "Product/Supplier"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Criado"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "404": {
             "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
+                  },
+                  "cnpj": {
+                    "example": "any"
+                  },
+                  "name": {
+                    "example": "any"
+                  },
+                  "telephone": {
+                    "example": "any"
+                  },
+                  "address": {
+                    "example": "any"
+                  },
+                  "productsName": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/suppliers": {
+      "get": {
+        "tags": [
+          "Product/Supplier"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/suppliers/{id}": {
+      "get": {
+        "tags": [
+          "Product/Supplier"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Product/Supplier"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "409": {
+            "description": "Conflito"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -575,81 +838,6 @@
             }
           }
         }
-      }
-    },
-    "/suppliers": {
-      "get": {
-        "tags": [
-          "Product/Supplier"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Não Encontrado"
-          },
-          "500": {
-            "description": "Erro Interno do Servidor"
-          }
-        }
-      }
-    },
-    "/suppliers/{id}": {
-      "get": {
-        "tags": [
-          "Product/Supplier"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Não Encontrado"
-          },
-          "500": {
-            "description": "Erro Interno do Servidor"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Product/Supplier"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Não Encontrado"
-          },
-          "500": {
-            "description": "Erro Interno do Servidor"
-          }
-        }
       },
       "delete": {
         "tags": [
@@ -664,11 +852,21 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Não Encontrado"
@@ -685,9 +883,21 @@
           "Product"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Criado"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Não Encontrado"
@@ -797,17 +1007,68 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "404": {
             "description": "Não Encontrado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nameProduct": {
+                    "example": "any"
+                  },
+                  "priceProduct": {
+                    "example": "any"
+                  },
+                  "descriptionProduct": {
+                    "example": "any"
+                  },
+                  "expirationDate": {
+                    "example": "any"
+                  },
+                  "productStock": {
+                    "example": "any"
+                  },
+                  "promotionalPrice": {
+                    "example": "any"
+                  },
+                  "imgProduct": {
+                    "example": "any"
+                  },
+                  "reviewsProduct": {
+                    "example": "any"
+                  },
+                  "Category": {
+                    "example": "any"
+                  },
+                  "Supplier": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -824,11 +1085,21 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "404": {
             "description": "Não Encontrado"
@@ -845,12 +1116,24 @@
           "Orders"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -957,37 +1240,21 @@
           "Orders/OrderDetails"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "500": {
-            "description": "Erro Interno do Servidor"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Orders/OrderDetails"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Erro Interno do Servidor"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Orders/OrderDetails"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -1009,11 +1276,55 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Orders/OrderDetails"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -1027,12 +1338,24 @@
           "Orders/StatusOrder"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Criado"
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -1058,12 +1381,24 @@
           "Orders/StatusOrder"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -1085,6 +1420,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1093,6 +1435,9 @@
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -1112,6 +1457,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1121,8 +1473,25 @@
           "400": {
             "description": "Solicitação Inválida"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -1139,6 +1508,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1147,6 +1523,9 @@
           },
           "400": {
             "description": "Solicitação Inválida"
+          },
+          "401": {
+            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -1256,6 +1635,20 @@
           },
           "500": {
             "description": "Erro Interno do Servidor"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "payment": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -1681,7 +2074,7 @@
                       },
                       "required": {
                         "type": "string",
-                        "example": "dado nescessário para o cadastrado do produto"
+                        "example": "dado necessário para o cadastrado do produto"
                       }
                     }
                   }
@@ -1703,7 +2096,7 @@
                       },
                       "required": {
                         "type": "string",
-                        "example": "dado nescessário para o cadastrado do produto"
+                        "example": "dado necessário para o cadastrado do produto"
                       }
                     }
                   }

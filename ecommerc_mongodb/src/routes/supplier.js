@@ -3,25 +3,33 @@ const connectDB = require('../middlewares/connectDB');
 const router = express.Router();
 
 const Supplier = require('../models/modelsProducts/productSupplier');
+const authAdm = require('../middlewares/authAdm');
 
 
-router.post('/supplier', connectDB, async (req, res) => {
+router.post('/supplier', authAdm , connectDB, async (req, res) => {
    //#swagger.tags = ['Product/Supplier']
-  //#swagger.description = ""
-    const {name, email, telephone, address, cnpj, productsName} = req.body;
+    let {name, email, telephone, address, cnpj, productsName} = req.body;
 
     try {
+
+        if(req.body.email !== "" && !/\S+@\S+\.\S+/.test(req.body.email)){
+            throw new Error(req.body.email + " não é um formato de email válido");
+        }
+
+       if(isNaN(req.body.cnpj)){
+        throw new Error("O campo 'CNPJ' dever só número inteiro.");
+       }
          
        const newSupplier = await Supplier.create({name, email, telephone, address, cnpj, productsName}) 
         return res.status(201).json(newSupplier)
 
     }catch(error){
         console.error(error)
-        return res.status(404).json({message: 'Erro tentar cadastrar fornecedor', error: erroressage});
+        return res.status(404).json({message: 'Erro tentar cadastrar fornecedor', error: error.message});
     }
 });
 
-router.get('/suppliers', connectDB, async (req, res) => {
+router.get('/suppliers',authAdm , connectDB, async (req, res) => {
     //#swagger.tags = ['Product/Supplier']
 
     try {
@@ -35,7 +43,7 @@ router.get('/suppliers', connectDB, async (req, res) => {
 
 });
 
-router.get('/suppliers/:id', connectDB, async (req, res) => {
+router.get('/suppliers/:id', authAdm , connectDB, async (req, res) => {
     //#swagger.tags = ['Product/Supplier']
 
     const {id} = req.params;
@@ -48,22 +56,30 @@ router.get('/suppliers/:id', connectDB, async (req, res) => {
       }  
 });
 
-router.put('/suppliers/:id', connectDB, async (req, res)=>{
+router.put('/suppliers/:id', authAdm , connectDB, async (req, res)=>{
     //#swagger.tags = ['Product/Supplier']
-    const body = req.body;
+    const {name, email, telephone, address, cnpj, productsName} = req.body;
     const {id} = req.params;
 
      try {
 
-        const updateSupplier = await Supplier.findByIdAndUpdate(id, body, {new: true});
+        if(req.body.name === "" || req.body.email === "" ||req.body.telephone === "" ||req.body.address === "" || req.body.cnpj === ""){
+            throw new Error("Todos os campos tem que estar devidamente preenchidos para alterar o Fornecedor")
+        }
+
+        if(req.body.email !== "" && !/\S+@\S+\.\S+/.test(req.body.email)){
+            throw new Error(req.body.email + " não é um formato de email válido");
+        }
+
+        const updateSupplier = await Supplier.findByIdAndUpdate(id, {name, email, telephone, address, cnpj, productsName}, {new: true});
         return res.status(200).json({updateSupplier});
         
     } catch (error) {
-       return res.status(404).json({message:"Erro tentar modificar os dados"});
+       return res.status(409).json({message:"Erro tentar modificar os dados", error: error.message});
     }
 });
 
-router.delete('/suppliers/:id', connectDB, async (req, res) => {
+router.delete('/suppliers/:id', authAdm ,  connectDB, async (req, res) => {
     //#swagger.tags = ['Product/Supplier']
 
     const {id}= req.params;

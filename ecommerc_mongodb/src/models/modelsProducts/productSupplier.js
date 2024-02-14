@@ -9,8 +9,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: "dado nescessário para cadastro do fornecedor",
     lowercase: true,
-    trim: true,
-    match: /\S+@\S+\.\S+/,
+    trim: true
   },
   telephone: {
     type: String,

@@ -2,8 +2,9 @@ const express = require("express");
 const connectDB = require("../middlewares/connectDB");
 const router = express.Router();
 const TypeOfDocument = require("../models/modelsClient/typeOfDocument");
+const authAdm = require("../middlewares/authAdm");
 
-router.post('/typeofdocument', connectDB, async (req, res) => {
+router.post('/typeofdocument', authAdm , connectDB, async (req, res) => {
   //#swagger.tags = ['Client/Type of document']
   let { typeOfDoc } = req.body;
 
@@ -40,7 +41,7 @@ router.delete('/typeofdocument/:id', connectDB, async (req, res) => {
     const removed = await TypeOfDocument.deleteOne({ _id: typeDocId });
     res.status(200).json({ message: "Tipo de documento deletado do banco de dados" });
   } catch (error) {
-    res.status(404).json({ message: "Erro ao tentar deletar tipo de documento" });
+    res.status(500).json({ message: "Erro ao tentar deletar tipo de documento" });
   }
 });
 

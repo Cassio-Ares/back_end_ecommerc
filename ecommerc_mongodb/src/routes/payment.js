@@ -43,11 +43,11 @@ routes.get('/formofpayment/:id', connectDB, async (req, res) => {
 
 routes.put('/formofpayment/:id', connectDB, async (req, res) => {
     //#swagger.tags = ['Orders/ Payments']
-    const body = req.body;
+    const {payment} = req.body;
     const {id} = req.params;
 
     try {
-        const putPayment = await Payment.findByIdAndUpdate(id, body, {new: true});
+        const putPayment = await Payment.findByIdAndUpdate(id,{payment}, {new: true});
         return res.status(200).json(putPayment);
     } catch (error) {
         console.error(error);

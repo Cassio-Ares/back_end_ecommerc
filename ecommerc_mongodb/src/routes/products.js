@@ -2,8 +2,9 @@ const express = require("express");
 const connectDB = require("../middlewares/connectDB");
 const router = express.Router();
 const Products = require("../models/modelsProducts/product");
+const authAdm = require("../middlewares/authAdm");
 
-router.post("/products", connectDB, async (req, res) => {
+router.post("/products", authAdm ,  connectDB, async (req, res) => {
   //#swagger.tags = ['Product']
   const {
     nameProduct,
@@ -19,6 +20,7 @@ router.post("/products", connectDB, async (req, res) => {
   } = req.body;
 
   try {
+ 
     const product = await Products.create({
       nameProduct,
       imgProduct,
@@ -32,15 +34,7 @@ router.post("/products", connectDB, async (req, res) => {
       Supplier,
     });
 
-    //TO DO
-    const populatedProduct = await Products.findById(product._id)
-    .populate({
-      path: 'Supplier',
-      select: 'name' 
-    })
-    .exec();
-
-    return res.status(201).json(populatedProduct);
+    return res.status(201).json(product);
 
   } catch (error) {
     console.error(error);
@@ -51,7 +45,7 @@ router.post("/products", connectDB, async (req, res) => {
 router.get('/products', connectDB, async (req, res) => {
     //#swagger.tags = ['Product']
      try {
-      const products = await Products.find();
+      const products = await Products.find().populate('Category', 'category').populate('Supplier', 'name').exec();
       return res.status(200).json(products);
      } catch (error) {
       console.error(error);
@@ -64,7 +58,7 @@ router.get('/products/:id', connectDB, async (req, res) =>{
     const {id} = req.params;
 
     try {
-      const getProduct = await Products.findById(id);
+      const getProduct = await Products.findById(id).populate('Category', 'category').populate('Supplier', 'name').exec();
       return res.status(200).json(getProduct);
     } catch (error) {
       console.error(error);
@@ -72,13 +66,49 @@ router.get('/products/:id', connectDB, async (req, res) =>{
     }
 });
 
-router.put('/products/:id', connectDB, async(req, res)=>{
+router.put('/products/:id', authAdm, connectDB, async(req, res)=>{
     //#swagger.tags = ['Product']
-  const body = req.body;
+  const {
+    nameProduct,
+    imgProduct,
+    priceProduct,
+    promotionalPrice,
+    descriptionProduct,
+    reviewsProduct,
+    expirationDate,
+    productStock,
+    Category,
+    Supplier,
+  } = req.body;
   const {id} = req.params;
 
   try {
-    const updateProduct = await Products.findByIdAndUpdate(id, body, {new: true});
+   
+    if(req.body.nameProduct === '' || req.body.priceProduct === '' || req.body.descriptionProduct === '' || req.body. expirationDate === '' || req.body.productStock === '' ){
+      throw new Error("Todos os campos tem que estar devidamente preenchidos para alterar o Produto")
+    }
+
+   
+   if(!/^\d{1,3}(,\d{3})*(\.\d{2})?$/.test(req.body.priceProduct)){
+       throw new Error("Verifique os dados este campo só aceita numeros, pontos e virgulas")
+   }
+
+   if(!/^\d{1,3}(,\d{3})*(\.\d{2})?$/.test(req.body.promotionalPrice)){
+    throw new Error("Verifique os dados este campo só aceita numeros, pontos e virgulas")
+}
+
+    const updateProduct = await Products.findByIdAndUpdate(id, {
+      nameProduct,
+      imgProduct,
+      priceProduct,
+      promotionalPrice,
+      descriptionProduct,
+      reviewsProduct,
+      expirationDate,
+      productStock,
+      Category,
+      Supplier,
+    }, {new: true});
     return res.status(200).json({updateProduct});
   } catch (error) {
     console.error(error);
@@ -86,7 +116,7 @@ router.put('/products/:id', connectDB, async(req, res)=>{
   }
 });
 
-router.delete('/products/:id', connectDB, async (req, res) => {
+router.delete('/products/:id', authAdm , connectDB, async (req, res) => {
     //#swagger.tags = ['Product']
   const {id} = req.params
 
