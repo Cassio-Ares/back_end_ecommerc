@@ -1116,24 +1116,12 @@
           "Orders"
         ],
         "description": "",
-        "parameters": [
-          {
-            "name": "x-auth-token",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
           },
           "400": {
             "description": "Solicitação Inválida"
-          },
-          "401": {
-            "description": "Não autorizado"
           },
           "500": {
             "description": "Erro Interno do Servidor"
@@ -1153,12 +1141,6 @@
                   },
                   "orderStatus": {
                     "example": "any"
-                  },
-                  "deliveryDate": {
-                    "example": "any"
-                  },
-                  "returnDeadline": {
-                    "example": "any"
                   }
                 }
               }
@@ -1172,6 +1154,41 @@
         ],
         "description": "",
         "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Solicitação Inválida"
+          },
+          "500": {
+            "description": "Erro Interno do Servidor"
+          }
+        }
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Solicitação Inválida"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -1182,9 +1199,39 @@
           "Orders"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Solicitação Inválida"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "orderStatus": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -1193,7 +1240,23 @@
           "Orders"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Solicitação Inválida"
+          },
           "500": {
             "description": "Erro Interno do Servidor"
           }
@@ -2504,7 +2567,7 @@
         "properties": {
           "title": {
             "type": "string",
-            "example": "OrdelDetails"
+            "example": "OrderDetails"
           },
           "required": {
             "type": "array",

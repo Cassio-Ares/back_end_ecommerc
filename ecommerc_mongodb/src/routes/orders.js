@@ -8,27 +8,37 @@ const authAdm = require('../middlewares/authAdm');
 const routes = express.Router();
 
 
-routes.post('/orders', authAdm ,connectDB, async (req, res) => {
+routes.post('/orders', connectDB, async (req, res) => {
     //#swagger.tags= ['Orders']
 
-    let {client, orderDetails, orderStatus, deliveryDate, returnDeadline} = req.body;
+    let {client, orderDetails, orderStatus} = req.body;
 
     try {
-        if (!client || !orderDetails) {
-            return res.status(400).json({ error: "IDs do cliente, detalhes do pedido e status do pedido são obrigatórios" });
-        }
 
-    const clientExist = await Client.findById(client);
-    const orderDetailsExist = await OrderDetails.findById(orderDetails);
-    const orderStatusExist = await OrderStatus.findById(orderStatus || orderStatus.default);
+    client = await Client.findById(client);
+    orderDetails = await OrderDetails.findById(orderDetails);
+    orderStatus = await OrderStatus.findById(orderStatus);
+
+    if(client === null){
+        throw new Error("Precisamos do cadastro do cliente para finalizar seu pedido")
+    }
+
+
+    if(orderDetails === null){
+        throw new Error("Verifique os detalhes do pedido")
+    }
+
+    if(orderStatus === null){
+        throw new Error("O Status do pedido esta nulo")
+    }
 
     const currentTimestamp = new Date();
-    deliveryDate = new Date(currentTimestamp.getTime() + (15 * 24 * 60 * 60 * 1000)); 
+    let deliveryDate = new Date(currentTimestamp.getTime() + (15 * 24 * 60 * 60 * 1000)); 
 
-    returnDeadline = new Date(deliveryDate.getTime() + (7 * 24 * 60 * 60 * 1000)); 
+    let returnDeadline = new Date(deliveryDate.getTime() + (7 * 24 * 60 * 60 * 1000)); 
   
 
-    const orders = await Orders.create({clientExist, orderDetailsExist,  orderStatusExist, deliveryDate, returnDeadline});
+    const orders = await Orders.create({client, orderDetails,  orderStatus, deliveryDate, returnDeadline});
 
     return res.status(200).json(orders);
 
@@ -42,23 +52,49 @@ routes.post('/orders', authAdm ,connectDB, async (req, res) => {
 routes.get('/orders', connectDB, async (req, res) => {
     //#swagger.tags= ['Orders']
         try {
-            const orders = await Orders.find().populate("client orderDetails orderStatus");
+            const orders = await Orders.find().populate('client').populate('orderDetails').populate('orderStatus').exec(); 
             return res.json(orders);
         } catch (err) {
             return res.status(400).json({ error: err.message });
         }
 });
 
-routes.get('/orders', connectDB, async (req, res) => {
+routes.get('/orders/:id', connectDB, async (req, res) => {
     //#swagger.tags= ['Orders']
+    const {id} = req.params;
+    try {
+        const getOneOrder = await Orders.findById(id).populate('client').populate('orderDetails').populate('orderStatus').exec();
+        return res.status(200).json(getOneOrder);
+    } catch (error) {
+        return res.status(400).json({ error: err.message });
+    }
 })
 
-routes.put('/orders', connectDB, async (req, res) => {
-    //#swagger.tags= ['Orders']
+routes.put('/orders/:id', connectDB, async (req, res) => {
+     //#swagger.tags= ['Orders']
+     let {orderStatus}= req.body;
+     let {id} = req.params;
+
+     try {
+        if(orderStatus === null){
+            throw new Error('Verifique o status');
+        }
+        const putOrders = await Orders.findByIdAndUpdate(id, {orderStatus}, {new: true});
+        return res.status(200).json(putOrders)        
+     } catch (error) {
+        return res.status(400).json({ error: err.message });
+     }
 })
 
-routes.delete('/orders', connectDB, async (req, res) => {
-    //#swagger.tags= ['Orders']
+routes.delete('/orders/:id', connectDB, async (req, res) => {
+     //#swagger.tags= ['Orders']
+     const {id} = req.params;
+     try {
+        const deleteOrders = await Orders.findByIdAndDelete(id);
+        return res.status(200).json(deleteOrders)
+     } catch (error) {
+        return res.status(400).json({ error: err.message });
+     }
 })
 
 

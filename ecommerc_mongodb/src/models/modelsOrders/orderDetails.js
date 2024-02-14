@@ -27,7 +27,7 @@ const schema = new mongoose.Schema({
 }
 })
 
-const SchemaOrderDetails = mongoose.models.OrderDetails || mongoose.model("OrdelDetails", schema);
+const SchemaOrderDetails = mongoose.models.OrderDetails || mongoose.model("OrderDetails", schema);
 
 module.exports = SchemaOrderDetails;
 
